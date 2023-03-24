@@ -181,6 +181,8 @@ button:hover {
 
 .element__img {
     object-fit: cover;
+    width: 100%;
+    aspect-ratio: 1/1;
 }
 
 .element__caption {
