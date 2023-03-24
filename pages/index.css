@@ -104,7 +104,7 @@ button:hover {
     }
 }
 
-.profile__edit {
+.profile__edit-btn {
     background: url(../images/edit-btn.svg) 100% 100% no-repeat;
     background-position: center;
     object-fit: cover;
@@ -123,7 +123,7 @@ button:hover {
     margin: 0;
 }
 
-.profile__add-button {
+.profile__add-btn {
     background: url(../images/add.svg) 100% 100% no-repeat;
     width: 150px;
     height: 50px;
@@ -138,6 +138,8 @@ button:hover {
         margin-top: 36px;
     }
 }
+/*__________________________________________________________ELEMENTS_________________________________________________________________*/
+
 
 .elements {
     display: grid;
@@ -200,7 +202,7 @@ button:hover {
     max-width: 190px;
 }
 
-.element__like {
+.element__like-btn {
     background: url(../images/like.svg) 100% 100% no-repeat;
     width: 22px;
     height: 19px;
@@ -209,6 +211,8 @@ button:hover {
     background-size: cover;
     border-style: none;
 }
+
+/*_________________________________________________________________FOOTER_________________________________________________________*/
 
 .footer {
     margin: 67px auto 60px;
@@ -224,4 +228,86 @@ button:hover {
         margin: 48px auto 36px;
     }
 }
+
+
+/*______________________________________________________________POPUP__________________________________________________________*/
+
+.popup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    background: rgba(0, 0, 0, .5);
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 111;
+
+}
+
+.popup__edit-form {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background-color: #FFF;
+    color: #000;
+    max-width: 358px;
+    width: 100%;
+    padding: 34px 36px 37px;
+    border-radius: 10px;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
+}
+
+.popup__close-btn {
+    background: url(../images/Close\ Icon.svg) 100% 100% no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 32px;
+    height: 32px;
+    border: none;
+    position: absolute;
+    top: -40px;
+    right: -40px;
+}
+
+.popup__title {
+    font-size: 24px;
+    font-weight: 900;
+    line-height: 29px;
+    margin: 0 0 47px;
+}
+
+.popup__form {
+    display: flex;
+    flex-direction: column;
+}
+
+.popup__text {
+    font-size: 14px;
+    font-weight: 400px;
+    line-height: 17px;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 0 0 13px;
+}
+
+.popup__text:nth-child(2) {
+    margin-top: 30px;
+}
+
+.popup__submit-btn {
+    background-color: #000;
+    color: #FFF;
+    width: 358px;
+    height: 50px;
+    border-radius: 2px;
+    border: none;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 22px;
+    text-align: center;
+    margin: 48px auto 0;
+}
+
 
