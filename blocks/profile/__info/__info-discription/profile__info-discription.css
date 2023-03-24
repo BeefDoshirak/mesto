@@ -1,0 +1,5 @@
+.profile__info-discription {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: nowrap;
+}
