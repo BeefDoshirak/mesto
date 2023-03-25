@@ -1,5 +1,5 @@
 .element__like-btn {
-    background: url(../../../../../images/like.svg) 100% 100% no-repeat;
+    background: url(../../../images/like.svg) 100% 100% no-repeat;
     width: 22px;
     height: 19px;
     flex-shrink: 0;
