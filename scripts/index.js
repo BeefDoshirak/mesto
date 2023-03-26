@@ -2,8 +2,8 @@ const editBtn = document.querySelector('.profile__edit-btn');
 const editPopup = document.querySelector('.popup');
 const editPopupCloseBtn = editPopup.querySelector('.popup__close-btn');
 const editPopupForm = editPopup.querySelector('.popup__form');
-const nameInput = editPopup.querySelector('.popup__text_name');
-const statusInput = editPopup.querySelector('.popup__text_status');
+const nameInput = editPopup.querySelector('.popup__text_type_name');
+const statusInput = editPopup.querySelector('.popup__text_type_status');
 const profileName = document.querySelector('.profile__name');
 const profileStatus = document.querySelector('.profile__subtitle');
 

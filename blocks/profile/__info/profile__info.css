@@ -8,5 +8,6 @@
 @media screen and (max-width: 879px) {
     .profile__info {
         align-items: center;
+        max-width: 282px;
     }
 }
