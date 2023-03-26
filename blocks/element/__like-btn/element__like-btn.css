@@ -6,4 +6,11 @@
     background-position: center;
     background-size: cover;
     border-style: none;
+    opacity: 1;
+    transition: opacity .15s;
+}
+
+.element__like-btn:hover {
+    opacity: .5;
+    cursor: pointer;
 }

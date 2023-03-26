@@ -10,4 +10,11 @@
     line-height: 22px;
     text-align: center;
     margin: 48px auto 0;
+    opacity: 1;
+    transition: opacity .15s;
+}
+
+.popup__submit-btn:hover {
+    opacity: .8;
+    cursor: pointer;
 }
