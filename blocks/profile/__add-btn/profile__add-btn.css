@@ -6,9 +6,10 @@
     border: 2px solid #FFF;
     border-radius: 2px;
     background-position: center;
+    flex-shrink: 0;
 }
 @media screen and (max-width:879px) {
-    .profile__add-button {
+    .profile__add-btn {
         width: 282px;
         margin-top: 36px;
     }

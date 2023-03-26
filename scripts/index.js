@@ -9,12 +9,12 @@ const profileStatus = document.querySelector('.profile__subtitle');
 
 
 editBtn.addEventListener('click', () => {
-    editPopup.classList.add('popup_open');
+    editPopup.classList.add('popup_opened');
     nameInput.value = profileName.textContent;
     statusInput.value = profileStatus.textContent;
 });
 editPopupCloseBtn.addEventListener('click', () => {
-    editPopup.classList.remove('popup_open');
+    editPopup.classList.remove('popup_opened');
 });
 
 
@@ -25,5 +25,5 @@ editPopupForm.addEventListener('submit', (event) => {
 
     profileName.textContent = name;
     profileStatus.textContent = status;
-    editPopup.classList.remove('popup_open');
+    editPopup.classList.remove('popup_opened');
 });
