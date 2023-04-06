@@ -29,6 +29,7 @@
 
 @import url(../blocks/elements/elements.css);
 @import url(../blocks/element/element.css);
+@import url(../blocks/element/__trash-btn/element__trash-btn.css);
 @import url(../blocks/element/__img/element__img.css);
 @import url(../blocks/element/__caption/element__caption.css);
 @import url(../blocks/element/__title/element__title.css);
@@ -50,3 +51,6 @@
 @import url(../blocks/popup/__text/popup__text.css);
 @import url(../blocks/popup/__submit-btn/popup__submit-btn.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
+@import url(../blocks/popup/__img-container/popup__img-container.css);
+@import url(../blocks/popup/__img-text/popup__img-text.css);
+@import url(../blocks/popup/__image/popup__image.css);

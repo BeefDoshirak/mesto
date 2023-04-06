@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="./scripts/initialCards.js"></script>
         <link rel="stylesheet" href="./pages/index.css">
         <title>Место</title>
     </head>
@@ -25,7 +26,7 @@
             <section class="elements">
                 <template id="card">
                     <article class="element">
-                        <button class="element__trash" type="button"></button>
+                        <button class="element__trash-btn" type="button"></button>
                         <img class="element__img" alt="Фотография места" src="./images/elem1.jpg" role="button">
                         <div class="element__caption">
                             <h2 class="element__title">Карачаевск</h2>
@@ -60,11 +61,11 @@
                 </form>
             </div>
         </div>
-        <div class="popup cardPopup">
-            <div class="popup__container">
+        <div class="popup imgPopup">
+            <div class="popup__img-container">
                 <button type="button" class="popup__close-btn"></button>
-                <h2 class="popup__title">Редактировать профиль</h2>
                 <img class="popup__image" alt="фото места" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg">
+                <p class="popup__img-text">Камчатка</p>
             </div>
         </div>
         <script src="./scripts/index.js" defer></script>
