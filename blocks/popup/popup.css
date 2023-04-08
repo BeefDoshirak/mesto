@@ -10,5 +10,6 @@
     height: 100%;
     z-index: 111;
     visibility: hidden;
+    opacity: 0;
     transition: visibility .15s, opacity .15s linear;
 }

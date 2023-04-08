@@ -61,7 +61,7 @@ const addCard = (cardData) => {
     const cardTitle = cardElement.querySelector('.element__title');
     const cardImg = cardElement.querySelector('.element__img');
 
-    cardTitle.innerHTML = cardData.name;
+    cardTitle.textContent = cardData.name;
     cardImg.src = cardData.link;
 //кнопка удаления элемента:
     const trashBtn = cardElement.querySelector('.element__trash-btn');
