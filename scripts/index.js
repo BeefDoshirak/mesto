@@ -113,10 +113,6 @@ addBtn.addEventListener('click', () => {
     openPopup(addPopup);
 });
 
-//закрыть окно пополнения галереи:
-addPopupCloseBtn.addEventListener('click', () => {
-    closePopup(addPopup);
-});
 
 //добавить новую карточку элемента в галерею:
 const addPopupSubmit = (event) => {
@@ -130,8 +126,7 @@ const addPopupSubmit = (event) => {
     }
     addPhotoNameInput.value = '';
     addPhotoLinkInput.value = '';
-
-
+    
     postCard(addCard(cardData));
     closePopup(addPopup);
 };
