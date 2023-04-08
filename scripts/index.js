@@ -63,33 +63,35 @@ const addCard = (cardData) => {
 
     cardTitle.textContent = cardData.name;
     cardImg.src = cardData.link;
+    cardImg.alt = cardData.name;
 //кнопка удаления элемента:
     const trashBtn = cardElement.querySelector('.element__trash-btn');
 //кнопка лайка элемента    
     const likeBtn = cardElement.querySelector('.element__like-btn');
 
     //удалить элемент:
-    const elementDelete = (event) => {
+    const deleteElement = (event) => {
         event.stopPropagation();
         cardElement.remove();
     };
 
     //лайкнуть элемент:
-    const elementLike = (event) => {
+    const toggleLike = (event) => {
         event.stopPropagation();
         likeBtn.classList.toggle('element__like-btn_active');
     };
 
     //активация нажатием на кнопки карточки:
-    trashBtn.addEventListener('click', elementDelete);
+    trashBtn.addEventListener('click', deleteElement);
 
-    likeBtn.addEventListener('click', elementLike);
+    likeBtn.addEventListener('click', toggleLike);
 
 
     //открытие картинки нажатием:
     cardImg.addEventListener('click', () => {
         image.src = cardData.link;
-        imageText.innerHTML = cardData.name;
+        image.alt = cardData.name;
+        imageText.textContent = cardData.name;
         openPopup(imgPopup);
     });
 
@@ -102,19 +104,17 @@ const addCard = (cardData) => {
 
 //добавить карточку элемента в начало галереи:
 
-const cardPlace = (cardElement) => {
+const postCard = (cardElement) => {
     cardContainer.prepend(cardElement);
 }
 
 initialCards.forEach((card) => {
-    cardPlace(addCard(card));
+    postCard(addCard(card));
 });
 
 
 //открыть окно пополнения галереи:
 addBtn.addEventListener('click', () => {
-    addPhotoNameInput.value = '';
-    addPhotoLinkInput.value = '';
     openPopup(addPopup);
 });
 
@@ -133,8 +133,11 @@ const addPopupSubmit = (event) => {
         name,
         link,
     }
+    addPhotoNameInput.value = '';
+    addPhotoLinkInput.value = '';
 
-    cardPlace(addCard(cardData));
+
+    postCard(addCard(cardData));
     closePopup(addPopup);
 };
 
