@@ -1,6 +1,5 @@
 const editBtn = document.querySelector('.profile__edit-btn');
 const editPopup = document.querySelector('.editPopup');
-const editPopupCloseBtn = editPopup.querySelector('.popup__close-btn');
 const editPopupForm = editPopup.querySelector('.popup__form');
 const nameInput = editPopup.querySelector('.popup__text_type_name');
 const statusInput = editPopup.querySelector('.popup__text_type_status');
@@ -10,15 +9,13 @@ const elementTemplate = document.getElementById('card');
 const cardContainer = document.querySelector('.elements');
 const addBtn = document.querySelector('.profile__add-btn');
 const addPopup = document.querySelector('.addPopup');
-const addPopupCloseBtn = addPopup.querySelector('.popup__close-btn');
 const addPopupForm = addPopup.querySelector('.popup__form');
 const addPhotoNameInput = addPopupForm.querySelector('.popup__text_type_name');
 const addPhotoLinkInput = addPopupForm.querySelector('.popup__text_type_photo-link');
 const imgPopup = document.querySelector('.imgPopup');
-const closeImgPopup = imgPopup.querySelector('.popup__close-btn');
 const image = imgPopup.querySelector('.popup__image');
 const imageText = imgPopup.querySelector('.popup__img-text');
-
+const closeButtons = document.querySelectorAll('.popup__close-btn');
 
 //открыть диалоговое окно:
 const openPopup = (popup) => {
@@ -29,15 +26,17 @@ const closePopup = (popup) => {
     popup.classList.remove('popup_opened');
 }
 
+closeButtons.forEach((button) => {
+  const popup = button.closest('.popup');
+  button.addEventListener('click', () => closePopup(popup));
+});
+ 
+
 //открыть окно редактирования профиля:
 editBtn.addEventListener('click', () => {
     openPopup(editPopup);
     nameInput.value = profileName.textContent;
     statusInput.value = profileStatus.textContent;
-});
-//закрыть окно редактирования профиля:
-editPopupCloseBtn.addEventListener('click', () => {
-    closePopup(editPopup);
 });
 
 //сохранить изменения профиля
@@ -49,10 +48,6 @@ editPopupForm.addEventListener('submit', (event) => {
     profileName.textContent = name;
     profileStatus.textContent = status;
     closePopup(editPopup);
-});
-
-closeImgPopup.addEventListener('click', () => {
-    closePopup(imgPopup);
 });
 
 //добавить карточку элемента:
