@@ -17,13 +17,23 @@ const image = imgPopup.querySelector('.popup__image');
 const imageText = imgPopup.querySelector('.popup__img-text');
 const closeButtons = document.querySelectorAll('.popup__close-btn');
 
+//закрыть окно по нажатию Esc:
+const closeByEsc = (evt) => {
+    if (evt.key === 'Escape') {
+        const openedPopup = document.querySelector('.popup_opened');
+        closePopup(openedPopup);
+    }
+}
+
 //открыть диалоговое окно:
 const openPopup = (popup) => {
     popup.classList.add('popup_opened');
+    document.addEventListener('keydown', closeByEsc);
 }
 //закрыть диалоговое окно:
 const closePopup = (popup) => {
     popup.classList.remove('popup_opened');
+    document.removeEventListener('keydown', closeByEsc);
 }
 
 closeButtons.forEach((button) => {
@@ -31,6 +41,20 @@ closeButtons.forEach((button) => {
   button.addEventListener('click', () => closePopup(popup));
 });
  
+//закрыть кликом по overlay:
+const closeOnOverlay = () => {
+    const popupList = Array.from(document.querySelectorAll('.popup'));
+
+    popupList.forEach((popupElement) => {
+        popupElement.addEventListener('click', function (evt) {
+            if (evt.currentTarget === evt.target) {
+                closePopup(popupElement);
+            }
+        });
+    });
+};
+
+closeOnOverlay();
 
 //открыть окно редактирования профиля:
 editBtn.addEventListener('click', () => {
@@ -126,7 +150,7 @@ const addPopupSubmit = (event) => {
     }
     addPhotoNameInput.value = '';
     addPhotoLinkInput.value = '';
-    
+
     postCard(addCard(cardData));
     closePopup(addPopup);
 };
