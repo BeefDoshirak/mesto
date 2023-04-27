@@ -1,6 +1,6 @@
 const editBtn = document.querySelector('.profile__edit-btn');
-const editPopup = document.querySelector('.editPopup');
-const editPopupForm = editPopup.querySelector('.popup__form');
+const editPopup = document.querySelector('.profile_edit-form');
+const formEditProfile = editPopup.querySelector('.popup__form');
 const nameInput = editPopup.querySelector('.popup__text_type_name');
 const statusInput = editPopup.querySelector('.popup__text_type_status');
 const profileName = document.querySelector('.profile__name');
@@ -8,11 +8,11 @@ const profileStatus = document.querySelector('.profile__subtitle');
 const elementTemplate = document.getElementById('card');
 const cardContainer = document.querySelector('.elements');
 const addBtn = document.querySelector('.profile__add-btn');
-const addPopup = document.querySelector('.addPopup');
-const addPopupForm = addPopup.querySelector('.popup__form');
-const addPhotoNameInput = addPopupForm.querySelector('.popup__text_type_name');
-const addPhotoLinkInput = addPopupForm.querySelector('.popup__text_type_photo-link');
-const imgPopup = document.querySelector('.imgPopup');
+const addPopup = document.querySelector('.element_add-form');
+const cardAddForm = addPopup.querySelector('.popup__form');
+const PhotoNameInput = cardAddForm.querySelector('.popup__text_type_name');
+const PhotoLinkInput = cardAddForm.querySelector('.popup__text_type_photo-link');
+const imgPopup = document.querySelector('.element_open-card');
 const image = imgPopup.querySelector('.popup__image');
 const imageText = imgPopup.querySelector('.popup__img-text');
 const closeButtons = document.querySelectorAll('.popup__close-btn');
@@ -64,7 +64,7 @@ editBtn.addEventListener('click', () => {
 });
 
 //сохранить изменения профиля
-editPopupForm.addEventListener('submit', (event) => {
+formEditProfile.addEventListener('submit', (event) => {
     event.preventDefault();
     const name = nameInput.value;
     const status = statusInput.value;
@@ -141,21 +141,21 @@ addBtn.addEventListener('click', () => {
 //добавить новую карточку элемента в галерею:
 const addPopupSubmit = (event) => {
     event.preventDefault();
-    const name = addPhotoNameInput.value;
-    const link = addPhotoLinkInput.value;
+    const name = PhotoNameInput.value;
+    const link = PhotoLinkInput.value;
 
     const cardData = {
         name,
         link,
     }
-    addPhotoNameInput.value = '';
-    addPhotoLinkInput.value = '';
+    PhotoNameInput.value = '';
+    PhotoLinkInput.value = '';
 
     postCard(addCard(cardData));
     closePopup(addPopup);
 };
 
-addPopupForm.addEventListener('submit', addPopupSubmit);
+cardAddForm.addEventListener('submit', addPopupSubmit);
 
 const config = {
     formSelector: '.popup__form',
