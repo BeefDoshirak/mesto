@@ -10,8 +10,8 @@ const cardContainer = document.querySelector('.elements');
 const addBtn = document.querySelector('.profile__add-btn');
 const addPopup = document.querySelector('.popup_add-card');
 const cardAddForm = addPopup.querySelector('.popup__form');
-const PhotoNameInput = cardAddForm.querySelector('.popup__text_type_name');
-const PhotoLinkInput = cardAddForm.querySelector('.popup__text_type_photo-link');
+const photoNameInput = cardAddForm.querySelector('.popup__text_type_name');
+const photoLinkInput = cardAddForm.querySelector('.popup__text_type_photo-link');
 const imgPopup = document.querySelector('.popup_card-opened');
 const image = imgPopup.querySelector('.popup__image');
 const imageText = imgPopup.querySelector('.popup__img-text');
@@ -141,15 +141,15 @@ addBtn.addEventListener('click', () => {
 //добавить новую карточку элемента в галерею:
 const addPopupSubmit = (event) => {
     event.preventDefault();
-    const name = PhotoNameInput.value;
-    const link = PhotoLinkInput.value;
+    const name = photoNameInput.value;
+    const link = photoLinkInput.value;
 
     const cardData = {
         name,
         link,
     }
-    PhotoNameInput.value = '';
-    PhotoLinkInput.value = '';
+    photoNameInput.value = '';
+    photoLinkInput.value = '';
 
     postCard(addCard(cardData));
     closePopup(addPopup);
