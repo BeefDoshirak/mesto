@@ -1,3 +1,7 @@
+import FormValidator from "../scripts/FormValidator.js";
+import Card from "../scripts/Card.js";
+
+
 const editBtn = document.querySelector('.profile__edit-btn');
 const editPopup = document.querySelector('.popup_edit-profile');
 const formEditProfile = editPopup.querySelector('.popup__form');
@@ -16,6 +20,12 @@ const imgPopup = document.querySelector('.popup_card-opened');
 const image = imgPopup.querySelector('.popup__image');
 const imageText = imgPopup.querySelector('.popup__img-text');
 const closeButtons = document.querySelectorAll('.popup__close-btn');
+
+const addCard = (cardData) => {
+    const preCard = new Card(cardData, elementTemplate, openCardByClick);
+    const card = preCard.createCard();
+    return card;
+}
 
 //закрыть окно по нажатию Esc:
 const closeByEsc = (evt) => {
@@ -74,51 +84,12 @@ formEditProfile.addEventListener('submit', (event) => {
     closePopup(editPopup);
 });
 
-//добавить карточку элемента:
-const addCard = (cardData) => {
-    const cardElement = elementTemplate.content.querySelector('.element').cloneNode(true);
-    const cardTitle = cardElement.querySelector('.element__title');
-    const cardImg = cardElement.querySelector('.element__img');
-
-    cardTitle.textContent = cardData.name;
-    cardImg.src = cardData.link;
-    cardImg.alt = cardData.name;
-//кнопка удаления элемента:
-    const trashBtn = cardElement.querySelector('.element__trash-btn');
-//кнопка лайка элемента    
-    const likeBtn = cardElement.querySelector('.element__like-btn');
-
-    //удалить элемент:
-    const deleteElement = (event) => {
-        event.stopPropagation();
-        cardElement.remove();
-    };
-
-    //лайкнуть элемент:
-    const toggleLike = (event) => {
-        event.stopPropagation();
-        likeBtn.classList.toggle('element__like-btn_active');
-    };
-
-    //активация нажатием на кнопки карточки:
-    trashBtn.addEventListener('click', deleteElement);
-
-    likeBtn.addEventListener('click', toggleLike);
-
-
-    //открытие картинки нажатием:
-    cardImg.addEventListener('click', () => {
-        image.src = cardData.link;
-        image.alt = cardData.name;
-        imageText.textContent = cardData.name;
-        openPopup(imgPopup);
-    });
-
-
-
-    return cardElement;
-}
-
+const openCardByClick  = (cardData) => {
+    image.src = cardData.link;
+    image.alt = cardData.name;
+    imageText.textContent = cardData.name;
+    openPopup(imgPopup);
+  }
 
 
 //добавить карточку элемента в начало галереи:
@@ -166,4 +137,8 @@ const config = {
     errorClass: 'popup__text_error',
 }
 
-enableValidation(config);
+const profileValidator = new FormValidator(config, editPopup);
+const cardValidator = new FormValidator(config, addPopup);
+
+profileValidator.enableValidation();
+cardValidator.enableValidation();
