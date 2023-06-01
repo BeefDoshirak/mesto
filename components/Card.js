@@ -1,11 +1,11 @@
 class Card {
-    constructor(cardData, templateSelector, openByClick) {
+    constructor({cardData, handleCardClick}, templateSelector) {
       this._template = this._getCardTemplate(templateSelector);
-      this._title = this._template.querySelector('.element__title');
+      this._name = this._template.querySelector('.element__title');
       this._image = this._template.querySelector('.element__img');
-      this._openByClick = openByClick;
+      this._handleCardClick = handleCardClick;
       this._data = cardData;
-      this._title.textContent = cardData.name;
+      this._name.textContent = cardData.name;
       this._image.src = cardData.link;
       this._image.alt = cardData.name;
       this._trashBtn = this._template.querySelector('.element__trash-btn');
@@ -26,17 +26,13 @@ class Card {
       this._likeBtn.classList.toggle('element__like-btn_active');
     };
   
-    _openCardByClick = () => {
-      this._openByClick(this._data);
-    }
-  
     _setEventListeners = () => {
       this._trashBtn.addEventListener('click', this._deleteElement);
       this._likeBtn.addEventListener('click', this._toggleLike);
-      this._image.addEventListener('click', this._openCardByClick);
+      this._image.addEventListener('click', this._handleCardClick.bind(this.data));
     }
   
-    createCard = () => {
+    generateCard = () => {
       this._setEventListeners();
       return this._template;
     }
