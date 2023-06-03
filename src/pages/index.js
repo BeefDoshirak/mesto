@@ -63,17 +63,9 @@ const handleAddPopupSubmit = (formData) => {
     cardList.addItem(cardElement);
 };
 
-const config = {
-    formSelector: '.popup__form',
-    inputSelector: '.popup__text',
-    submitButtonSelector: '.popup__submit-btn',
-    inactiveButtonClass: 'popup__submit-btn_inactive',
-    inputErrorClass: 'popup__text_type_invalid',
-    errorClass: 'popup__text_error',
-}
-const handleEditPopupSubmit = () => {
-    userInfo.setUserInfo({name: nameInput.value, info: statusInput.value})
-};
+const handleEditPopupSubmit = (formData) => {
+    userInfo.setUserInfo({name: formData.name, info: formData.status})
+  };
 
 const editProfilePopup = new PopupWithForm('.popup_edit-profile', handleEditPopupSubmit);
 const addCardPopup = new PopupWithForm('.popup_add-card', handleAddPopupSubmit);

@@ -2,7 +2,7 @@
   "name": "mesto",
   "version": "1.0.0",
   "description": "___ ![](https://img.shields.io/badge/-HTML5-orange) ![](https://img.shields.io/badge/-CSS3-blue) ![](https://img.shields.io/badge/-JavaScript-yellow) ___ ## Адапривная верстка одностраничного сайта c всплывающим модальным окном с применением **JS**.",
-  "main": "index.js",
+  "main": "",
   "scripts": {
     "build": "rm -rf dist && webpack --mode=production",
     "dev": "webpack serve"

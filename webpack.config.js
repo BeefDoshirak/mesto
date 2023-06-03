@@ -12,7 +12,7 @@ module.exports = {
   mode: 'development',
   devServer: {
     open: true,
-    port: 8083,
+    port: 8080,
     compress: true,
   },
   module: {
