@@ -1,6 +1,7 @@
 import FormValidator from "../components/FormValidator.js";
 import Card from "../components/Card.js";
 import { initialCards } from "../utils/constants.js";
+import { config } from "../utils/constants.js";
 import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
