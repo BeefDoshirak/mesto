@@ -14,10 +14,10 @@
                 <img class="profile__avatar" src="<%=require('./images/avatar.jpg')%>" alt="аватар">
                 <div class="profile__info">
                     <div class="profile__title">
-                        <h1 class="profile__name">Жак-Ив Кусто</h1>
+                        <h1 class="profile__name"></h1>
                         <button class="profile__edit-btn" type="button"></button>
                     </div>
-                    <p class="profile__subtitle">Исследователь океана</p>
+                    <p class="profile__subtitle"></p>
                 </div>
                 <button class="profile__add-btn" type="button"></button>
             </section>
@@ -28,7 +28,10 @@
                         <img class="element__img" alt="Фотография места" src="./images/elem1.jpg" role="button">
                         <div class="element__caption">
                             <h2 class="element__title">Карачаевск</h2>
-                            <button class="element__like-btn" type="button"></button>
+                            <div class="element__likes">
+                                <button class="element__like-btn" type="button"></button>
+                                <p class="element__like-counter">0</p>
+                            </div>
                         </div>
                     </article>
                 </template>
