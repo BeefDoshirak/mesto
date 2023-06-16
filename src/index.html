@@ -11,7 +11,9 @@
         </header>
         <main>
             <section class="profile">
-                <img class="profile__avatar" src="<%=require('./images/avatar.jpg')%>" alt="аватар">
+                <div class="profile__overlay-container">
+                    <img class="profile__avatar" src="<%=require('./images/avatar.jpg')%>" alt="аватар">
+                </div>
                 <div class="profile__info">
                     <div class="profile__title">
                         <h1 class="profile__name"></h1>
@@ -71,6 +73,24 @@
                 <button type="button" class="popup__close-btn"></button>
                 <img class="popup__image" alt="фото места" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg">
                 <p class="popup__img-text">Камчатка</p>
+            </div>
+        </div>
+        <div class="popup popup_confirm-changes">
+            <div class="popup__container">
+                <button type="button" class="popup__close-btn"></button>
+                <h2 class="popup__title popup__confirm">Вы уверены?</h2>
+                <button type="submit" class="popup__submit-btn">Да</button>
+            </div>
+        </div>
+        <div class="popup popup_update-avatar">
+            <div class="popup__container">
+                <button type="button" class="popup__close-btn"></button>
+                <h2 class="popup__title">Обновить аватар</h2>
+                <form name="cardInfo" class="popup__form" novalidate>
+                    <input id="update-profile-photo-input" type="url" name="photo-avatar-link" placeholder="Ссылка на фото" class="popup__text popup__text_type_photo-avatar-link"required minlength="2" maxlength="30">
+                    <span class="update-profile-photo-input popup__text-error"></span>
+                    <button type="submit" class="popup__submit-btn">Сохранить</button>
+                </form>
             </div>
         </div>
     </body>

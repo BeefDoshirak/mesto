@@ -4,45 +4,48 @@ import { config } from "../utils/constants.js";
 import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
+import ConfirmPopup from "../components/ConfirmPopup.js";
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
 
 import '../pages/index.css'
 
-
-const editBtn = document.querySelector('.profile__edit-btn');
-const editPopup = document.querySelector('.popup_edit-profile');
-const formEditProfile = editPopup.querySelector('.popup__form');
-const nameInput = editPopup.querySelector('.popup__text_type_name');
-const statusInput = editPopup.querySelector('.popup__text_type_status');
-const profileName = document.querySelector('.profile__name');
-const profileStatus = document.querySelector('.profile__subtitle');
-const elementTemplate = document.getElementById('card');
-const cardContainer = document.querySelector('.elements');
-const addBtn = document.querySelector('.profile__add-btn');
-const addPopup = document.querySelector('.popup_add-card');
-const cardAddForm = addPopup.querySelector('.popup__form');
-const photoNameInput = cardAddForm.querySelector('.popup__text_type_name');
-const photoLinkInput = cardAddForm.querySelector('.popup__text_type_photo-link');
-const imgPopup = document.querySelector('.popup_card-opened');
-const image = imgPopup.querySelector('.popup__image');
-const imageText = imgPopup.querySelector('.popup__img-text');
-const closeButtons = document.querySelectorAll('.popup__close-btn');
+import {editBtn,
+    editPopup,
+    nameInput,
+    statusInput,
+    elementTemplate,
+    cardContainer,
+    addBtn,
+    addPopup,
+    confirmPopup,
+    updateAvatarPopup
+    } from '../utils/constants.js';
 
 const api = new Api ({
-    url: 'https://mesto.nomoreparties.co/v1/cohort-68/',
+    url: "https://mesto.nomoreparties.co/v1/cohort-68/",
     headers: {
-        authorization: 'da0a089a-98ac-46e3-a2b1-f3ddd493176f',
+        authorization: "da0a089a-98ac-46e3-a2b1-f3ddd493176f",
     }
 })
 
 const createCard = (cardData, userData) => {
     const card = new Card({cardData, userData, handleCardClick: () => {
         popupWithImage.open({link: cardData.link, name: cardData.name});
+    }, handleTrashBtnClick: (data,temp) => {
+        confirmPopup.open();
+        confirmPopup.getCardData(cardData,temp);
     }}, elementTemplate, api);
     return card.generateCard();
 }
 
+const handleDeleteConfirm = (cardData, temp) => {
+    api.deleteCard(cardData)
+    .then(()=> {
+        temp.remove()
+    })
+    .catch((err) => console.log(`Что-то пошло не так ${err}`));
+}
 let cardList
 
 api.getAppInfo().then(([cards, userData]) => {
@@ -58,10 +61,11 @@ api.getAppInfo().then(([cards, userData]) => {
 
 
 const popupWithImage = new PopupWithImage('.popup_card-opened');
-const userInfo = new userInfo({nameSelector: '.profile__name', infoSelector: '.profile__subtitle'});
+const confirmPopup = new ConfirmPopup('.popup_confirm-changes', handleDeleteConfirm);
+const userInfo = new UserInfo({nameSelector: '.profile__name', infoSelector: '.profile__subtitle'});
 
 const info = api.getUserInfo().then((res) => {
-    userInfo.setUserInfo({name: res.name, info: res.about})
+    userInfo.setUserInfo({name: res.name, info: res.status})
 })
 
 

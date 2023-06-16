@@ -4,8 +4,8 @@ export default class Section {
         this._container = container;
     }
 
-    renderItems(itemList) {
-        itemList.forEach((item) => {
+    renderItems(itemsList) {
+        itemsList.forEach((item) => {
             this._renderer(item);
         });
     }

@@ -25,7 +25,7 @@ export default class Api {
         })
         .then(this._handleResponse);
     }
-    postCard(name,link) {
+    postCard(name, link) {
         return fetch(`${this._url}/cards/`, {
             method: "POST",
             headers: {
@@ -48,7 +48,7 @@ export default class Api {
         })
         .then(this._handleResponse);
     }
-    editUserInfo(name, status) {
+    editUserInfo(name, about) {
         return fetch(`${this._url}/user/me`, {
             method: "PATCH",
             headers: {
@@ -57,7 +57,7 @@ export default class Api {
             },
             body: JSON.stringify({
                 name: name,
-                status: status,
+                about: about,
             })
         })
         .then(this._handleResponse);
@@ -79,9 +79,20 @@ export default class Api {
     }
 
 
-    addLike(userData, cardID) {
+    putLike(userData, cardID) {
         return fetch(`${this._url}/cards/${cardID}/likes`, {
-            method: "POST",
+            method: "PUT",
+            headers: {
+                authorization: this._authorization,
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(userData)
+        })
+        .then(this._handleResponse);
+    }
+    deleteLike(userData, cardID) {
+        return fetch(`${this._url}/cards/${cardID}/likes`, {
+            method: "DELETE",
             headers: {
                 authorization: this._authorization,
                 'Content-type': 'application/json'

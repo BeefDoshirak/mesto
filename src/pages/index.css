@@ -58,3 +58,4 @@
 @import url(../blocks/popup/__text/_type/popup__text_type_invalid.css);
 @import url(../blocks/popup/__text/popup__text-error.css);
 @import url(../blocks/popup/__submit-btn/_inactive/popup__submit-btn_inactive.css);
+@import url(../blocks/popup/__confirm/popup__confirm.css);
