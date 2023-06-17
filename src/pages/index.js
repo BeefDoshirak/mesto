@@ -18,16 +18,49 @@ import {editBtn,
     cardContainer,
     addBtn,
     addPopup,
-    confirmPopup,
-    updateAvatarPopup
+    updateAvatarPopup,
+    editAvatarBtn
     } from '../utils/constants.js';
 
 const api = new Api ({
-    url: "https://mesto.nomoreparties.co/v1/cohort-68/",
+    url: 'https://mesto.nomoreparties.co/v1/cohort-68',
     headers: {
-        authorization: "da0a089a-98ac-46e3-a2b1-f3ddd493176f",
+        authorization:'da0a089a-98ac-46e3-a2b1-f3ddd493176f',
     }
 })
+const handleAddPopupSubmit = (formData) => {
+    const name = formData.name;
+    const link = formData['photo-link'];
+
+    const cardData = {
+        name,
+        link,
+    }
+    api.getCardInfo(name, link).then(([res, userData]) => {
+        const cardElement = createCard(res, userData);
+        cardList.addNewItem(cardElement);
+    });
+};
+const handleEditAvatarPopupSubmit = (formData) => {
+    api.editUserAvatar(formData['photo-avatar-link']).then(() => {
+        userInfo.setUserPhoto({photoAlt: "avatar", photoLink: formData['photo-avatar-link']})
+    });
+  };
+
+
+const handleEditPopupSubmit = (formData) => {
+    api.editUserInfo(formData.name, formData.status).then(() => {
+        userInfo.setUserInfo({name: formData.name, info: formData.status});
+    });
+  };
+
+  const handleDeleteConfirm = (cardData, temp) => {
+    api.deleteCard(cardData)
+    .then(()=> {
+        temp.remove()
+    })
+    .catch((err) => console.log(`Что-то пошло не так ${err}`));
+}
 
 const createCard = (cardData, userData) => {
     const card = new Card({cardData, userData, handleCardClick: () => {
@@ -39,18 +72,12 @@ const createCard = (cardData, userData) => {
     return card.generateCard();
 }
 
-const handleDeleteConfirm = (cardData, temp) => {
-    api.deleteCard(cardData)
-    .then(()=> {
-        temp.remove()
-    })
-    .catch((err) => console.log(`Что-то пошло не так ${err}`));
-}
 let cardList
 
 api.getAppInfo().then(([cards, userData]) => {
     cardList = new Section({
-        renderer: (cardData, userData) => {
+        renderer: (cardData) => {
+            const cardElement = createCard(cardData, userData);
             cardList.addItem(cardElement);
         },
     },
@@ -62,46 +89,31 @@ api.getAppInfo().then(([cards, userData]) => {
 
 const popupWithImage = new PopupWithImage('.popup_card-opened');
 const confirmPopup = new ConfirmPopup('.popup_confirm-changes', handleDeleteConfirm);
-const userInfo = new UserInfo({nameSelector: '.profile__name', infoSelector: '.profile__subtitle'});
+confirmPopup.setEventListeners();
+const userInfo = new UserInfo({nameSelector: '.profile__name', infoSelector: '.profile__subtitle', avatarSelector: '.profile__avatar'});
 
 const info = api.getUserInfo().then((res) => {
-    userInfo.setUserInfo({name: res.name, info: res.status})
+    userInfo.setUserAvatar({name: res.name, info: res.about, avatar: res.avatar})
 })
 
 
 
-const handleAddPopupSubmit = (formData) => {
-    const name = formData.name;
-    const link = formData['photo-link'];
-
-    const cardData = {
-        name,
-        link,
-    }
-
-    api.getCardInfo(name, link).then(([res, userData]) => {
-        const cardElement = createCard(res, userData);
-        cardList.addNewItem(cardElement);
-    });
-};
-
-const handleEditPopupSubmit = (formData) => {
-    userInfo.setUserInfo({name: formData.name, info: formData.status});
-    api.editUserInfo(formData.name, formData.status);
-  };
 
 const editProfilePopup = new PopupWithForm('.popup_edit-profile', handleEditPopupSubmit);
 const addCardPopup = new PopupWithForm('.popup_add-card', handleAddPopupSubmit);
+const editAvatarPopup = new PopupWithForm('.popup_update-avatar', handleEditAvatarPopupSubmit);
 
 editProfilePopup.setEventListeners();
 addCardPopup.setEventListeners();
+editAvatarPopup.setEventListeners();
 
 const profileValidator = new FormValidator(config, editPopup);
 const cardValidator = new FormValidator(config, addPopup);
+const editAvatarValidator = new FormValidator(config, updateAvatarPopup);
 
 profileValidator.enableValidation();
 cardValidator.enableValidation();
-
+editAvatarValidator.enableValidation();
 
 
 editBtn.addEventListener('click', (evt) => {
@@ -114,4 +126,8 @@ editBtn.addEventListener('click', (evt) => {
 
 addBtn.addEventListener('click', () => {
     addCardPopup.open();
+});
+
+editAvatarBtn.addEventListener('click', () => {
+    editAvatarPopup.open();
 });

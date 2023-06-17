@@ -49,7 +49,7 @@ export default class Api {
         .then(this._handleResponse);
     }
     editUserInfo(name, about) {
-        return fetch(`${this._url}/user/me`, {
+        return fetch(`${this._url}/users/me`, {
             method: "PATCH",
             headers: {
                 authorization: this._authorization,
@@ -64,9 +64,9 @@ export default class Api {
     }
 
     _handleResponse(res) {
-        if(res.ok){
+        if (res.ok){
             return res.json()
-        }else{
+        } else {
             return Promise.reject(`Ошибка ${res.status}`)
         }
     }
@@ -98,6 +98,19 @@ export default class Api {
                 'Content-type': 'application/json'
             },
             body: JSON.stringify(userData)
+        })
+        .then(this._handleResponse);
+    }
+    editUserAvatar(avatarLink) {
+        return fetch(`${this._url}/users/me/avatar`, {
+            method: "PATCH",
+            headers: {
+                authorization: this._authorization,
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                avatar: avatarLink
+            })
         })
         .then(this._handleResponse);
     }

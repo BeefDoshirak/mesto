@@ -55,6 +55,7 @@ const imageText = imgPopup.querySelector('.popup__img-text');
 const closeButtons = document.querySelectorAll('.popup__close-btn');
 const confirmPopup = document.querySelector('.popup_confirm-changes');
 const updateAvatarPopup = document.querySelector('.popup_update-avatar');
+const editAvatarBtn = document.querySelector('.profile__overlay-container');
 
 export {editBtn,
 editPopup,
@@ -65,5 +66,6 @@ cardContainer,
 addBtn,
 addPopup,
 confirmPopup,
-updateAvatarPopup
+updateAvatarPopup,
+editAvatarBtn,
 }
