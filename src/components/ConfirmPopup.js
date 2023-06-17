@@ -11,11 +11,18 @@ export default class ConfirmPopup extends Popup {
         this._temp = temp;
     }
 
+    async handleSubmit(event) {
+        event.preventDefault();
+        const originalText = this._submitBtn.textContent;
+        try {
+            this._submitBtn.textContent = 'Удаление...';
+            await this._submitCallback(this._cardID, this._temp);
+            this.close();
+        } finally {this._submitBtn.textContent = originalText;}
+    }
+
     setEventListeners() {
         super.setEventListeners();
-        this._submitBtn.addEventListener('click', (evt) => {
-            this._submitCallback(this._cardID, this._temp);
-            this.close();
-        });
+        this._submitBtn.addEventListener('click', this.handleSubmit.bind(this));
     }
 }
