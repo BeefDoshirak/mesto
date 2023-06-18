@@ -29,6 +29,10 @@ class Card {
     _getCardTemplate = (templateSelector) => {
       return templateSelector.content.querySelector(".element").cloneNode(true);
     }
+
+    deleteCard = () => {
+      this._template.remove();
+    }
   
 
   

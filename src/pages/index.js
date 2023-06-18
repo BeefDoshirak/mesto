@@ -39,25 +39,24 @@ const handleAddPopupSubmit = (formData) => {
     api.getCardInfo(name, link).then(([res, userData]) => {
         const cardElement = createCard(res, userData);
         cardList.addNewItem(cardElement);
-    });
+    }).catch((err) => console.log(`catch: ${err}`));
 };
 const handleEditAvatarPopupSubmit = (formData) => {
     api.editUserAvatar(formData['photo-avatar-link']).then(() => {
         userInfo.setUserPhoto({photoAlt: "avatar", photoLink: formData['photo-avatar-link']})
-    });
+    }).catch((err) => console.log(`catch: ${err}`));
   };
 
 
 const handleEditPopupSubmit = (formData) => {
     api.editUserInfo(formData.name, formData.status).then(() => {
         userInfo.setUserInfo({name: formData.name, info: formData.status});
-    });
+    }).catch((err) => console.log(`catch: ${err}`));
   };
 
   const handleDeleteConfirm = (cardData, temp) => {
-    api.deleteCard(cardData)
-    .then(()=> {
-        temp.remove()
+    api.deleteCard(cardData).then(()=> {
+        temp.deleteCard();
     })
     .catch((err) => console.log(`Что-то пошло не так ${err}`));
 }
@@ -89,23 +88,24 @@ api.getAppInfo().then(([cards, userData]) => {
 
 const popupWithImage = new PopupWithImage('.popup_card-opened');
 const confirmPopup = new ConfirmPopup('.popup_confirm-changes', handleDeleteConfirm);
-confirmPopup.setEventListeners();
+
 const userInfo = new UserInfo({nameSelector: '.profile__name', infoSelector: '.profile__subtitle', avatarSelector: '.profile__avatar'});
 
-const info = api.getUserInfo().then((res) => {
+api.getUserInfo().then((res) => {
     userInfo.setUserAvatar({name: res.name, info: res.about, avatar: res.avatar})
-})
+}).catch((err) => console.log(`catch: ${err}`));
 
 
 
 
-const editProfilePopup = new PopupWithForm('.popup_edit-profile', handleEditPopupSubmit);
-const addCardPopup = new PopupWithForm('.popup_add-card', handleAddPopupSubmit);
-const editAvatarPopup = new PopupWithForm('.popup_update-avatar', handleEditAvatarPopupSubmit);
+const editProfilePopup = new PopupWithForm('.popup_edit-profile', handleEditPopupSubmit, config.inactiveButtonClass);
+const addCardPopup = new PopupWithForm('.popup_add-card', handleAddPopupSubmit,  config.inactiveButtonClass);
+const editAvatarPopup = new PopupWithForm('.popup_update-avatar', handleEditAvatarPopupSubmit,  config.inactiveButtonClass);
 
 editProfilePopup.setEventListeners();
 addCardPopup.setEventListeners();
 editAvatarPopup.setEventListeners();
+confirmPopup.setEventListeners();
 
 const profileValidator = new FormValidator(config, editPopup);
 const cardValidator = new FormValidator(config, addPopup);

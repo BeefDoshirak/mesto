@@ -78,6 +78,11 @@ class FormValidator {
         });
       });
     };
+
+    disableSubmitBtn(){
+      this._buttonElement.classList.add(this._inactiveButtonClass);
+      this._buttonElement.setAttribute('disabled', true);
+    }
   
     enableValidation = () => {
       this._setEventListeners();
