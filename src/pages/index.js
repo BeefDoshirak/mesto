@@ -84,6 +84,9 @@ api.getAppInfo().then(([cards, userData]) => {
     cardContainer
     );
     cardList.renderItems(cards);
+    userInfo.setUserAvatar({avatar: userData.avatar});
+    userInfo.setUserInfo({name: userData.name, info: userData.about});
+
 }).catch((err) => console.log(`catch: ${err}`));
 
 
@@ -91,11 +94,7 @@ const popupWithImage = new PopupWithImage('.popup_card-opened');
 const confirmPopup = new ConfirmPopup('.popup_confirm-changes', handleDeleteConfirm);
 confirmPopup.setEventListeners();
 const userInfo = new UserInfo({nameSelector: '.profile__name', infoSelector: '.profile__subtitle', avatarSelector: '.profile__avatar'});
-
-const info = api.getUserInfo().then((res) => {
-    userInfo.setUserAvatar({name: res.name, info: res.about, avatar: res.avatar})
-})
-
+const userId = api.getUserInfo._id;
 
 
 
