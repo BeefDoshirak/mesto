@@ -39,25 +39,28 @@ const handleAddPopupSubmit = (formData) => {
     api.getCardInfo(name, link).then(([res, userData]) => {
         const cardElement = createCard(res, userData);
         cardList.addNewItem(cardElement);
-    });
+    }).catch((err) => console.log(`catch: ${err}`));
 };
 const handleEditAvatarPopupSubmit = (formData) => {
     api.editUserAvatar(formData['photo-avatar-link']).then(() => {
         userInfo.setUserPhoto({photoAlt: "avatar", photoLink: formData['photo-avatar-link']})
-    });
+    }).catch((err) => console.log(`catch: ${err}`));
   };
 
 
 const handleEditPopupSubmit = (formData) => {
     api.editUserInfo(formData.name, formData.status).then(() => {
         userInfo.setUserInfo({name: formData.name, info: formData.status});
-    });
+    }).catch((err) => console.log(`catch: ${err}`));
   };
+
+
 
   const handleDeleteConfirm = (cardData, temp) => {
     api.deleteCard(cardData)
     .then(()=> {
-        temp.remove()
+        this._deleteCard(temp)
+       //temp.remove()
     })
     .catch((err) => console.log(`Что-то пошло не так ${err}`));
 }
@@ -94,8 +97,14 @@ const popupWithImage = new PopupWithImage('.popup_card-opened');
 const confirmPopup = new ConfirmPopup('.popup_confirm-changes', handleDeleteConfirm);
 confirmPopup.setEventListeners();
 const userInfo = new UserInfo({nameSelector: '.profile__name', infoSelector: '.profile__subtitle', avatarSelector: '.profile__avatar'});
-const userId = api.getUserInfo._id;
 
+//function renderBtn(button, isLoading, origText, loadingText) {
+ //   if (isLoading) {
+ //       button.textContent = loadingText
+   // } else {
+ //       button.textContent = origText
+ //   }
+//}
 
 
 const editProfilePopup = new PopupWithForm('.popup_edit-profile', handleEditPopupSubmit);

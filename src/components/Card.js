@@ -20,6 +20,10 @@ class Card {
       this._userData = userData;
       this._handleTrashBtnClick = handleTrashBtnClick;
     }
+
+    _deleteCard(temp){
+      temp.remove()
+    }
   
 
    _disableTrashBtn(){
